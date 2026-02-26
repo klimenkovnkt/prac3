@@ -21,7 +21,7 @@ let PILOTING = util.getUrlParameters().has('__pilotToken');
 
 // Start code blocks for 'Before Experiment'
 // Run 'Before Experiment' code from code
-import * as random from 'random';
+// import * as random from 'random'
 
 // init psychoJS:
 const psychoJS = new PsychoJS({
@@ -960,3 +960,4 @@ async function quitPsychoJS(message, isCompleted) {
   
   return Scheduler.Event.QUIT;
 }
+
