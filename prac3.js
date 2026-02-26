@@ -877,7 +877,35 @@ function byeRoutineBegin(snapshot) {
     byeMaxDuration = null
     // keep track of which components have finished
     byeComponents = [];
+        // Disable downloading results to browser
+    psychoJS._saveResults = 0;
     
+    // Generate filename for results
+    let filename = psychoJS._experiment._experimentName + '_' + psychoJS._experiment._datetime + '.csv';
+    // Extract data object from experiment
+    let dataObj = psychoJS._experiment._trialsData;
+    // Convert data object to CSV
+    let data = [Object.keys(dataObj[0])].concat(dataObj).map(it => {
+        return Object.values(it).toString()
+    }).join('\n')
+    // Send data to OSF via DataPipe
+    console.log('Saving data...');
+    fetch('https://pipe.jspsych.org/api/data', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Accept: '*/*',
+         },   
+         body: JSON.stringify({
+            experimentID: 'aKf4OqUvkE0B', // * UPDATE WITH YOUR DATAPIPE EXPERIMENT ID *
+            filename: filename, 
+            data: data,
+         }),
+    }).then(response => response.json()).then(data => {
+    // Log response and force experiment 
+        console.log(data);
+        quitPsychoJS();
+    })
     for (const thisComponent of byeComponents)
       if ('status' in thisComponent)
         thisComponent.status = PsychoJS.Status.NOT_STARTED;
@@ -960,5 +988,6 @@ async function quitPsychoJS(message, isCompleted) {
   
   return Scheduler.Event.QUIT;
 }
+
 
 
