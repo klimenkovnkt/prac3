@@ -100,7 +100,7 @@ psychoJS.start({
     {'name': 'distr/pin.png', 'path': 'distr/pin.png'},
     {'name': 'distr/kopatych.png', 'path': 'distr/kopatych.png'},
     {'name': 'distr/sovunya.png', 'path': 'distr/sovunya.png'},
-    {'name': 'default.png', 'path': 'https://pavlovia.org/assets/default/default.png'},
+    {'name': 'default.png', 'path': 'distr/karych.png'},
   ]
 });
 
@@ -1200,4 +1200,5 @@ async function quitPsychoJS(message, isCompleted) {
   
   return Scheduler.Event.QUIT;
 }
+
 
